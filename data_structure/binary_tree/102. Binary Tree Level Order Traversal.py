@@ -33,3 +33,30 @@ class Solution:
             results.append(result)
 
         return results
+
+
+class Solution_n:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+
+        que = []
+        que.append(root)
+
+        res = []
+
+        if root is None:
+            return []
+
+        while que:
+            level_res = []
+            level_length = len(que)
+            for i in range(level_length):
+                node = que.pop(0)
+                if node.left:
+                    que.append(node.left)
+                if node.right:
+                    que.append(node.right)
+                level_res.append(node.val)
+
+            res.append(level_res)
+
+        return res
