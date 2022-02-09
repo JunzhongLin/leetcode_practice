@@ -47,3 +47,30 @@ class Solution:
                 )
         return int(stack.pop()) # 如果一开始只有一个数，那么会是字符串形式的
 
+
+class SolutionNew:
+    def evalRPN(self, tokens) -> int:
+
+        if tokens == []:
+            return None
+
+        operator_dict = {
+            '+': lambda x, y: x + y,
+            '-': lambda x, y: y - x,
+            '*': lambda x, y: x * y,
+            '/': lambda x, y: int(y/x)
+        }
+
+        stack = [int(tokens[0])]
+
+        for token in tokens[1:]:
+            if token in operator_dict:
+                value = operator_dict[token](stack.pop(), stack.pop())
+                stack.append(value)
+            else:
+                stack.append(int(token))
+
+        print(stack)
+        return stack.pop()
+
+example = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
